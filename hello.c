@@ -78,7 +78,7 @@ static int __init hello_init(void)
 		if (tail->next == NULL) {
 			kfree(tail->next);
 			printk(KERN_ERR "Out of memory");
-			return -EINVAL;
+			return -ENOMEM;
 		}
 		tail = tail->next;
 		tail->next = NULL;
