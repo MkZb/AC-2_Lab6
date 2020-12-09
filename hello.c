@@ -76,9 +76,14 @@ static int __init hello_init(void)
 	for (i = 1; i < k; i++) {
 		tail->next = kmalloc(sizeof(struct time_list *), GFP_KERNEL);
 		if (tail->next == NULL) {
+			while (head != NULL) {
+				tail = head;
+				head = tail->next;
+				kfree(tail);
+			}
 			kfree(tail->next);
 			printk(KERN_ERR "Out of memory");
-			return -EINVAL;
+			return -ENOMEM;
 		}
 		tail = tail->next;
 		tail->next = NULL;
