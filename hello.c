@@ -81,7 +81,6 @@ static int __init hello_init(void)
 				head = tail->next;
 				kfree(tail);
 			}
-			kfree(tail->next);
 			printk(KERN_ERR "Out of memory");
 			return -ENOMEM;
 		}
